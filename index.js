@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
       cb(null, 'public/images')
     },
     filename: function (req, file, cb) {
+      console.log("file",req.body.name);
       cb(null, req.body.name)
     }
   })
@@ -26,8 +27,10 @@ const storage = multer.diskStorage({
 
   app.post('/upload', upload.single("file"), (req,res)=>{
     try{
-      console.log("success"); 
-        res.status(200).json({message:"File uploaded successfully"})
+        console.log("success",req.body.name); 
+        // res.status(200).json(req.body.name);
+        res.status(200).json(req.body.name)
+
     }
     catch(err){console.log("couldnot upload",err)}
   })
