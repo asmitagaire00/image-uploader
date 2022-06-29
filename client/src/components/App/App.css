@@ -1,11 +1,13 @@
-.app{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 1px solid;
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.browse-button-hide{
-    display: none;
+.footer {
+  background: #f6f8fb;
+  width: 100%;
+  text-align: center;
 }

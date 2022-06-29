@@ -3,6 +3,7 @@ import axios from "axios";
 
 import UploadedItem from "../UploadedItem/UploadedItem";
 import "./UploadImage.css";
+import Loader from "../Loader/Loader";
 
 const UploadImage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -12,32 +13,38 @@ const UploadImage: React.FC = () => {
   const [uploadButtonClicked, setUploadButtonClicked] =
     useState<boolean>(false);
   const [copyLink, setCopyLink] = useState(null);
+  const [allowDropChangeBorder, setAllowDropChangeBorder] =
+    useState<boolean>(false);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const allowDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
+    setAllowDropChangeBorder(true);
+  };
+
+  const leaveDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setAllowDropChangeBorder(false);
   };
 
   const drop = (e: React.DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
+    setUploadButtonClicked(false);
 
-    console.log("dropped", e.dataTransfer.files);
     const imageFile = e.dataTransfer.files[0];
-
-
-    setFile(() => {
-      return imageFile;
-    });
+    setFile(imageFile);
 
     handleUpload(e);
   };
 
   const handleUpload = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-
     setBrowseButtonClicked(false);
     setUploadButtonClicked(true);
+    setLoading(true);
 
     if (file) {
       const data = new FormData();
@@ -50,65 +57,76 @@ const UploadImage: React.FC = () => {
           console.log("data", data);
           setCopyLink(data);
         });
+
+        setLoading(false);
       } catch (err) {
         console.log("error occured in uploads", err);
       }
     }
-    console.log("file from handleupload", file);
   };
 
   const handleBrowseButton = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     setBrowseButtonClicked(true);
     inputFile?.current?.click();
-    console.log("inputfile", inputFile?.current?.value);
   };
+
+  if (loading)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
 
   return (
     <div
       onDrop={drop}
       onDragOver={allowDrop}
+      onDragLeave={leaveDrop}
+      className="upload-image-container"
     >
-      {file && (
-        <UploadedItem
-          file={file}
-          setFile={setFile}
-          uploadButtonClicked={uploadButtonClicked}
-          copyLink={copyLink}
-        />
-      )}
+      <div className="upload-image-title">
+        <h2>Upload your image</h2>
+        <h4>Files should be Jpeg, Png,....</h4>
+      </div>
 
-      {!file && (
-        <div>
-          <img
-            src="assets/image.svg"
-            alt="image_drag_drop"
-            className="image-drag-drop"
+      <UploadedItem
+        file={file}
+        setFile={setFile}
+        uploadButtonClicked={uploadButtonClicked}
+        copyLink={copyLink}
+        allowDropChangeBorder={allowDropChangeBorder}
+      />
+
+      <div className="upload-image-form-container">
+        <form action="/upload" onSubmit={handleUpload} method="post">
+          <input
+            type="file"
+            name="file"
+            id="upload"
+            accept=".jpg, .jpeg, .png, .webp"
+            ref={inputFile}
+            style={{ display: "none" }}
+            onChange={(e) =>
+              e.target.files != null && setFile(e.target.files[0])
+            }
           />
-          <h2 className="h2-drag-drop">Drag & drop your image here</h2>
-        </div>
-      )}
-      <form action="/upload" onSubmit={handleUpload} method="post">
-        <input
-          type="file"
-          name="file"
-          id="upload"
-          accept=".jpg, .jpeg, .png, .webp"
-          ref={inputFile}
-          style={{ display: "none" }}
-          onChange={(e) => e.target.files != null && setFile(e.target.files[0])}
-        />
-        <button
-          className={
-            browseButtonClicked ? "browse-button-hide" : "browse-button-show"
-          }
-          onClick={handleBrowseButton}
-        >
-          Browse
-        </button>
+          {!uploadButtonClicked && !browseButtonClicked && (
+            <span className="text">or</span>
+          )}
+          <button className="browse-button-show" onClick={handleBrowseButton}>
+            Choose a file
+          </button>
 
-        {file && <button type="submit">Upload</button>}
-      </form>
+          {file && !uploadButtonClicked ? (
+            <button type="submit" style={{ marginTop: "10px" }}>
+              Upload
+            </button>
+          ) : (
+            <></>
+          )}
+        </form>
+      </div>
     </div>
   );
 };

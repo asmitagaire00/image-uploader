@@ -1,15 +1,11 @@
-import React from 'react'
-import "./Loader.css"
+import "./Loader.css";
 
-
-
-
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
-    <div className='loader'>
-     
-    </div>
-  )
-}
+    <>
+      <h1 className="upload-image-container">Uploading...</h1>
+    </>
+  );
+};
 
-export default Loader
+export default Loader;
