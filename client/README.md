@@ -23,7 +23,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Built With](#built-with)
+- [Built With](#built-with)
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
@@ -32,17 +32,19 @@
 ## Overview
 
 ![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+<img width="1509" alt="Screen Shot" src="https://user-images.githubusercontent.com/71869793/176670453-dc02b8f9-617c-4c21-af43-bfe7f99e4140.png">
 
 Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
 
-- Where can I see your demo?
-- What was your experience?
-- What have you learned/improved?
-- Your wisdom? :)
+
 
 ### Built With
 
 - [React](https://reactjs.org/)
+- [Node]
+- [Multer]
+- [Express]
+- [cors]
 
 ## Features
 
@@ -58,7 +60,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/asmitagaire00/image-uploader
 
 # Install dependencies
 $ npm install
@@ -77,6 +79,6 @@ $ npm start
 
 ## Contact
 
-- Website [your-website.com](https://www.acupofasmita.com/)
-- GitHub [@your-username](https://github.com/asmitagaire00)
-- Twitter [@your-twitter](https://{twitter.com/asmita_gaire})
+- Website [https://www.acupofasmita.com/]
+- GitHub [https://github.com/asmitagaire00]
+- Twitter [https://twitter.com/asmita_gaire]
