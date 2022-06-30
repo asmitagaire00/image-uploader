@@ -32,7 +32,6 @@ const UploadImage: React.FC = () => {
   const drop = (e: React.DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
-    setUploadButtonClicked(false);
 
     const imageFile = e.dataTransfer.files[0];
     setFile(imageFile);
@@ -54,15 +53,13 @@ const UploadImage: React.FC = () => {
 
       try {
         await axios.post("/upload", data).then(({ data }) => {
-          console.log("data", data);
           setCopyLink(data);
         });
-
-        setLoading(false);
       } catch (err) {
         console.log("error occured in uploads", err);
       }
     }
+    setLoading(false);
   };
 
   const handleBrowseButton = (e: React.FormEvent<EventTarget>) => {
@@ -114,16 +111,16 @@ const UploadImage: React.FC = () => {
           {!uploadButtonClicked && !browseButtonClicked && (
             <span className="text">or</span>
           )}
-          <button className="browse-button-show" onClick={handleBrowseButton}>
-            Choose a file
-          </button>
+          {!uploadButtonClicked && (
+            <button className="browse-button-show" onClick={handleBrowseButton}>
+              Choose a file
+            </button>
+          )}
 
-          {file && !uploadButtonClicked ? (
+          {file && !copyLink && (
             <button type="submit" style={{ marginTop: "10px" }}>
               Upload
             </button>
-          ) : (
-            <></>
           )}
         </form>
       </div>
