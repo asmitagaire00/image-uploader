@@ -27,24 +27,20 @@
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+Screenshot of image uploader app. With this app you can upload an image by drag and drop or choosing a file. It stores the choosen image on the server with the help of [Multer](https://www.npmjs.com/package/multer) . Once it is uploaded the link of the uploded image can be copied to the clipboard. 
+
 <img width="1509" alt="Screen Shot" src="https://user-images.githubusercontent.com/71869793/176670453-dc02b8f9-617c-4c21-af43-bfe7f99e4140.png">
-
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
-
-
 
 ### Built With
 
 - [React](https://reactjs.org/)
-- [Node]
-- [Multer]
-- [Express]
-- [cors]
+- [Node](https://nodejs.org/en/)
+- [Multer](https://www.npmjs.com/package/multer)
+- [Express](https://expressjs.com/)
+- [cors](https://www.npmjs.com/package/cors)
 
 ## Features
 
@@ -69,13 +65,13 @@ $ npm install
 $ npm start
 ```
 
-## Acknowledgements
-
+<!-- ## Acknowledgements
+ -->
 <!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example -->
 
-- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
+<!-- - [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
 - [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
+- [Marked - a markdown parser](https://github.com/chjj/marked) -->
 
 ## Contact
 
